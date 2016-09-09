@@ -38,7 +38,7 @@ class dnsdist::install(
           gpgcheck => 1,
         }
 
-        exec { 'import dnsdist gpg key':
+        exec { 'powerdist-gpg-key':
           command => 'rpm --import https://repo.powerdns.com/FD380FBB-pub.asc',
           unless  => "rpm -qa --nodigest --nosignature --qf '%{VERSION}-%{RELEASE} %{SUMMARY}\n' | grep fd380fbb",
           path    => [ '/bin', '/usr/bin', '/sbin', '/usr/sbin' ],
