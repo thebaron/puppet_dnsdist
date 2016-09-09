@@ -25,29 +25,16 @@
 #    listen_addresess => [ '192.168.1.1' ];
 #  }
 #
-class dnsdist ($webserver = '0.0.0.0:80', $webserver_pass = 'geheim', $control_socket = '127.0.0.1', $listen_addresess = '0.0.0.0') {
-  apt::pin { 'dnsdist':
-    origin   => 'repo.powerdns.com',
-    priority => '600'
-  }
+class dnsdist (
+  $webserver        = '0.0.0.0:80',
+  $webserver_pass   = 'geheim',
+  $control_socket   = '127.0.0.1',
+  $listen_addresess = '0.0.0.0',
+  $enable_repo      = true
+) {
 
-  apt::key { 'powerdns':
-    key         => 'FD380FBB',
-    key_content => template('dnsdist/aptkey.erb'),
-  }
-
-  apt::source { 'repo.powerdns.com':
-    location    => 'http://repo.powerdns.com/ubuntu',
-    repos       => 'main',
-    release     => 'trusty-dnsdist-10',
-    include_src => false,
-    amd64_only  => true,
-    require     => [Apt::Pin['dnsdist'], Apt::Key['powerdns']];
-  }
-
-  package { 'dnsdist':
-    ensure  => present,
-    require => [Apt::Source['repo.powerdns.com']];
+  class { 'dnsdist::install':
+    enable_repo => $enable_repo
   }
 
   concat { "/etc/dnsdist/dnsdist.conf":
