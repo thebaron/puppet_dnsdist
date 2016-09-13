@@ -30,7 +30,7 @@ define dnsdist::addcache ($pool='', $varname='', $size=10000, $max_life=86400, $
   concat::fragment { "addcache-${order}-${title}":
     target  => "/etc/dnsdist/dnsdist.conf",
     content => "pc_${order} = newPacketCache(${size}, ${max_life}, ${min_ttl_to_cache}, ${srv_fail_ttl}, ${$stale_ttl}\
-        getPool(\"${pool}\"):setCache(pc_${order})\n"
+        getPool(\"${pool}\"):setCache(pc_${order})\n",
     order   => "60"
   }
 }
