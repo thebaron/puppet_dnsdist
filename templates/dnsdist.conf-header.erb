@@ -3,4 +3,5 @@ controlSocket("<%= control_socket %>")
 <% listen_addresess.each do |listen_addres|
   -%>addLocal("<%= listen_addres %>")
 <% end -%>
-<% if carbon_server != '' -%>carbonServer("<%= carbon_server %>", <%= carbon_period %>)<% end -%>
+<% if carbon_server != '' -%>carbonServer("<%= carbon_server %>", <%= carbon_period %>)
+<% end -%>
