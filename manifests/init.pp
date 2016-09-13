@@ -30,7 +30,9 @@ class dnsdist (
   $webserver_pass   = 'geheim',
   $control_socket   = '127.0.0.1',
   $listen_addresess = '0.0.0.0',
-  $enable_repo      = true
+  $enable_repo      = true,
+  $carbon_server    = '',
+  $carbon_period    = 30,
 ) {
 
   class { 'dnsdist::install':

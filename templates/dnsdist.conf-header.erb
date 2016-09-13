@@ -1,5 +1,6 @@
 webserver("<%= webserver %>", "<%= webserver_pass %>")
 controlSocket("<%= control_socket %>")
-<% listen_addresess.each do |listen_addres| 
+<% listen_addresess.each do |listen_addres|
   -%>addLocal("<%= listen_addres %>")
 <% end -%>
+<% if carbon_server != '' -%>carbonServer("<%= carbonServer %>", $carbon_period)<% end -%>
